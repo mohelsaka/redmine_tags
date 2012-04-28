@@ -38,7 +38,8 @@ Redmine::Plugin.register :redmine_tags do
     :issues_show_count => 0,
     :issues_open_only => 0,
     :issues_sort_by => 'name',
-    :issues_sort_order => 'asc'
+    :issues_sort_order => 'asc',
+    :inline_cache => 1
   }, :partial => 'tags/settings'
 end
 

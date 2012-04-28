@@ -22,15 +22,33 @@ module IssuesHelper
   def sidebar_tags
     unless @sidebar_tags
       @sidebar_tags = []
+
       if :none != RedmineTags.settings[:issues_sidebar].to_sym
         @sidebar_tags = Issue.available_tags({
           :project => @project,
-          :open_only => (RedmineTags.settings[:issues_open_only].to_i == 1)
+          :open_only => (1 == RedmineTags.settings[:issues_open_only].to_i)
         })
       end
     end
+
     @sidebar_tags
   end
+
+
+  def inline_tags_cache
+    if @inline_tags_cache.nil?
+      @inline_tags_cache = false
+
+      if 1 == RedmineTags.settings[:inline_cache].to_i
+        @inline_tags_cache = Issue.available_tags({
+          :project => @project
+        }).map{ |v| v.to_s }
+      end
+    end
+
+    @inline_tags_cache
+  end
+
 
   def render_sidebar_tags
     render_tags_list(sidebar_tags, {

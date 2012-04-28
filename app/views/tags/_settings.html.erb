@@ -1,3 +1,10 @@
+<fieldset><legend><%= l(:setting_tags) %></legend>
+  <p>
+    <label><%= l(:inline_cache) %></label>
+    <%= check_box_tag 'settings[inline_cache]', 1, 1 == @settings[:inline_cache].to_i %>
+  </p>
+</fieldset>
+
 <fieldset><legend><%= l(:setting_issue_tags) %></legend>
   <p>
     <label><%= l(:issues_sidebar) %></label>
