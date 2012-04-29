@@ -23,6 +23,10 @@ bg:
   tags: Маркери
   field_tags: Маркери
   field_tag_list: Маркери
+
+  setting_tags: translation missing, (en) General Settings
+  inline_cache: translation missing, (en) Use cached autocomplete
+
   setting_issue_tags: Маркери на задачите
   issues_sidebar: Показване на страничния панел като
   issues_show_count: Показване на броя на задачите
