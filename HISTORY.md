@@ -1,6 +1,6 @@
 # HISTORY
 
-## 2.5.0 // WIP
+## 2.1.0 // WIP
 
 - Added Simplified Chinese translation. Thanks to archonwang.
 - Added Bulgarian translation. Thanks to Ivan Cenov.
