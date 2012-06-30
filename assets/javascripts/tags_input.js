@@ -26,7 +26,7 @@ Redmine.TagsInput = Class.create({
     this.input    = new Element('input', { 'type': 'text', 'autocomplete': 'off', 'size': 10 });
     this.button   = new Element('span', { 'class': 'tag-add icon icon-add' });
     this.tags     = new Hash();
-    
+
     Event.observe(this.button, 'click', this.readTags.bind(this));
     Event.observe(this.input, 'keypress', this.onKeyPress.bindAsEventListener(this));
 
@@ -76,15 +76,36 @@ Redmine.TagsInput = Class.create({
   },
 
   autocomplete: function(container, url) {
-    new Ajax.Autocompleter(this.input, container, url, {
-      'minChars': 1,
-      'frequency': 0.5,
-      'paramName': 'q',
-      'updateElement': function(el) {
-        this.input.value = el.getAttribute('name');
-        this.readTags();
-      }.bind(this)
-    });
+    var updater;
+
+    if (!!window.redmine_tags_cache) {
+      updater = new Autocompleter.Local(this.input, container, window.redmine_tags_cache, {
+        'updateElement': function(el) {
+          this.input.value = el.textContent;
+          this.readTags();
+        }.bind(this)
+      });
+    } else {
+      updater = new Ajax.Autocompleter(this.input, container, url, {
+        'minChars': 1,
+        'frequency': 0.5,
+        'paramName': 'q',
+        'updateElement': function(el) {
+          this.input.value = el.getAttribute('name');
+          this.readTags();
+        }.bind(this)
+      });
+
+      updater.options.onComplete = function (response) {
+        var tags, q = updater.getToken(), r = '<strong>' + q + '</strong>';
+
+        tags = response.responseJSON.collect(function (t) {
+          return '<li name="' + t + '">' + t.replace(q, r) + '</li>';
+        }).join('');
+
+        updater.updateChoices('<ul>' + tags + '</ul>');
+      };
+    }
   }
 });
 

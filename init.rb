@@ -27,7 +27,7 @@ Redmine::Plugin.register :redmine_tags do
   name        'redmine_tags'
   author      'Aleksey V Zapparov AKA "ixti"'
   description 'redMine tagging support'
-  version     '2.0.1-dev'
+  version     '2.1.0-dev'
   url         'https://github.com/ixti/redmine_tags/'
   author_url  'http://www.ixti.net/'
 
@@ -38,7 +38,8 @@ Redmine::Plugin.register :redmine_tags do
     :issues_show_count => 0,
     :issues_open_only => 0,
     :issues_sort_by => 'name',
-    :issues_sort_order => 'asc'
+    :issues_sort_order => 'asc',
+    :inline_cache => 1
   }, :partial => 'tags/settings'
 end
 

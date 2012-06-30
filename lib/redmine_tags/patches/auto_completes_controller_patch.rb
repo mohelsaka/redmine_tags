@@ -32,12 +32,10 @@ module RedmineTags
 
       module InstanceMethods
         def issue_tags
-          @name = params[:q].to_s
-          @tags = Issue.available_tags({
+          render :json => Issue.available_tags({
             :project_id => @project,
-            :name_like => @name
-          })
-          render :layout => false, :partial => 'tag_list'
+            :name_like => params[:q].to_s
+          }).map{ |v| v.to_s }
         end
       end
     end
