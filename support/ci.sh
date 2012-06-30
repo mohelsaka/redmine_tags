@@ -9,14 +9,12 @@ if [ -d support/redmine ] ; then
   echo "Removing previous redmine_tags"
   rm -rf vendor/plugins/redmine_tags
 else
-  echo "Setting up Redmine"
-  git clone git://github.com/redmine/redmine.git support/redmine
+  echo "Setting up Redmine v.1.4.4"
+  git clone --branch 1.4.4 --single-branch --depth 1 \
+    git://github.com/redmine/redmine.git support/redmine
 
   echo "Enter Redmine dir"
   cd support/redmine
-
-  echo "Checking out branch 1.4"
-  git checkout origin/1.4-stable
 
   echo "Creating up database.yml"
   echo "test:"                       >  config/database.yml
