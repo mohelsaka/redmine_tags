@@ -1,7 +1,5 @@
-GIT
-  remote: git://github.com/mbleigh/acts-as-taggable-on.git
-  revision: 20599f0801c2921f5a09c9d00c0e17fb8003176c
-  branch: rails2
+PATH
+  remote: vendor/acts-as-taggable-on
   specs:
     acts-as-taggable-on (2.1.0)
       rails
